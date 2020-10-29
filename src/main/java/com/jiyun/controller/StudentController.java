@@ -95,4 +95,9 @@ public class StudentController {
         studentService.delete(sid);
         return "redirect:/stu/show";
     }
+
+    @RequestMapping("/aaa")
+    public String aaa(int sid){
+        System.out.println("哈哈哈哈");
+    }
 }
