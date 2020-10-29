@@ -101,6 +101,7 @@ public class StudentController {
     public String aaa(int sid){
         System.out.println("哈哈哈哈");
         System.out.println("哈哈哈哈");
+        System.out.println("1.0哈哈哈哈");
         return "哈哈哈哈";
     }
 }
