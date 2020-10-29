@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script th:src="@{/js/jquery.min.js}"></script>
+</head>
+<body>
+    <form th:action="@{/stu/show}" id="form" method="post">
+        姓名：<input name="sname" th:value="${stu.sname}"><br>
+        日期：<input type="date" name="startTime" th:value="${#dates.format(stu.startTime,'yyyy-MM-dd')}">--
+        <input type="date" name="endTime" th:value="${#dates.format(stu.endTime,'yyyy-MM-dd')}">
+        <input type="hidden" name="pageNum" id="pageNum">
+        <input type="submit" value="查询">
+    </form>
+    <a th:href="@{/stu/add}">添加</a>
+  <table border="1">
+        <tr>
+            <td>学号</td>
+            <td>姓名</td>
+            <td>性别</td>
+            <td>生日</td>
+            <td>操作</td>
+        </tr>
+        <tr th:each="s : ${pb.list}">
+            <td th:text="${s.sxh}"></td>
+            <td th:text="${s.sname}"></td>
+            <td th:text="${s.ssex}==1?'男':'女'"></td>
+            <td th:text="${#dates.format(s.sbir,'yyyy-MM-dd')}"></td>
+            <td>
+                <a th:href="@{/stu/delete(sid=${s.sid})}">删除</a>
+                <a th:href="@{/stu/showid(sid=${s.sid})}">修改</a>
+            </td>
+        </tr>
+    </table>
+
+    <input  type="button" value="首页" th:onclick="'page('+${pb.firstPage}+')'">
+    <!--<input  type="button" value="上一页" th:onclick="'page('+${pb.prePage}+')'">
+    <input  type="button" value="下一页" th:onclick="'page('+${pb.nextPage}+')'">-->
+    <input th:if="${not pb.isFirstPage}" type="button" value="上一页" th:onclick="'page('+${pb.prePage}+')'">
+    <input th:if="${not pb.isLastPage}" type="button" value="下一页" th:onclick="'page('+${pb.nextPage}+')'">
+    <input  type="button" value="尾页" th:onclick="'page('+${pb.lastPage}+')'" >
+</body>
+<script>
+    function page(pageNum){
+        // 讲页数设置到查询表单，页码元素上
+        alert(pageNum)
+        document.getElementById("pageNum").value= pageNum;
+
+        //提交
+        document.getElementById("form").submit();
+    }
+        /*function page(pa){
+            debugger;
+            var pages=$(pb.pages);
+            if(pa>0 && pa<=pages){
+                $("#pageNum").prop("value",pa);
+                $("#form").submit();
+            }
+        }*/
+
+</script>
+</html>

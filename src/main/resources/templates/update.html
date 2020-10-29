@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form th:action="@{/stu/update}" method="post">
+    <input type="hidden" name="sid" th:value="${s.sid}">
+    学号：<input name="sxh" th:value="${s.sxh}"><br>
+    姓名：<input name="sname" th:value="${s.sname}"><br>
+    性别：<input type="radio" name="ssex" th:value="1" th:attr="checked=${s.ssex==1?true:false}">男
+    <input type="radio"  name="ssex" th:value="2" th:attr="checked=${s.ssex==2?true:false}">女<br>
+    生日：<input type="date" name="sbir" th:value="${#dates.format(s.sbir,'yyyy-MM-dd')}"><br>
+    <input type="submit" value="修改">
+</form>
+</body>
+</html>

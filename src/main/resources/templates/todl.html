@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script th:src="@{/js/jquery.min.js}"></script>
+</head>
+<body>
+<form th:action="@{/stu/addUser}" method="post">
+    姓名：<input name="uname" id="uname">
+    <span id="s1" style="color: red"></span><br>
+    密码：<input type="password" name="upwd"><br>
+    <input type="submit" value="添加">
+
+</form>
+</body>
+<script>
+    var a=false;
+        $("#uname").blur(function(){
+            var uname=$(this).val();
+            $.ajax({
+                url:"/stu/showname",
+                type:"post",
+                data:{uname:uname},
+                dataType:"json",
+                success:function (data) {
+                    alert(uname)
+                    if(data=="ok"){
+                        $("#s1").text("√");
+                        a=true;
+                    }else{
+                        $("#s1").text("用户名不能重复");
+                    }
+                }
+            })
+        })
+        $("form").submit(function () {
+            if(a){
+                return true;
+            }else{
+                return false;
+            }
+        })
+</script>
+</html>
