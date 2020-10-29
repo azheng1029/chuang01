@@ -99,5 +99,6 @@ public class StudentController {
     @RequestMapping("/aaa")
     public String aaa(int sid){
         System.out.println("哈哈哈哈");
+        System.out.println("哈哈哈哈");
     }
 }
